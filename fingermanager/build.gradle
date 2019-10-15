@@ -1,0 +1,112 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+//项目主页
+def siteUrl = 'https://github.com/Likeyong/CompatFingerManager'    // project homepage
+//项目的版本控制地址
+def gitUrl = 'https://github.com/Likeyong/CompatFingerManager.git' // project git
+
+//发布到组织名称名字，必须填写
+group = "com.codersun"
+//发布到JCenter上的项目名字，必须填写
+def libName = "CompatFingerManager"
+// 版本号，下次更新是只需要更改版本号即可
+version = "1.0.0"
+
+//生成源文件
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+//上传到jcenter所需要的源码文件
+artifacts {
+    archives sourcesJar
+}
+
+// 配置maven库，生成POM.xml文件
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'This is a fingerprint recognition framework compatible with api 23 and 28'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'codersun'
+                        name 'codersun'
+                        email 'coderSun@foxmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    bintray {
+        /**
+         * 用户名和key，这两个信息一般会保存在local.properties里面，只保留在本地，不上传到仓库。
+         */
+        user = properties.getProperty("bintray.user")
+        key = properties.getProperty("bintray.apikey")
+        println user
+        println key
+        configurations = ['archives']
+        pkg {
+            repo = "maven"               //跟上面创建的Maven仓库名字保持一致
+            name = "CompatFingerManager"                //发布到JCenter上的项目名字
+            websiteUrl = siteUrl
+            vcsUrl = gitUrl
+            licenses = ["Apache-2.0"]
+            publish = true
+        }
+    }
+}
+
+
+
