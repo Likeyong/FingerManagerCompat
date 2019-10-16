@@ -2,6 +2,7 @@ package com.codersun.fingerprintcompat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
 import android.support.annotation.RequiresApi;
@@ -12,8 +13,6 @@ public class FingerManager
 {
 
 	private static FingerManager fingerManager;
-
-	public static String IS_FINGER_CHANGE = "is_finger_change";//指纹是否变化了
 
 	private static FingerManagerController mFingerManagerController;
 
@@ -72,10 +71,11 @@ public class FingerManager
 	 */
 	public static SupportResult checkSupport(Context context)
 	{
-		FingerprintManagerCompat fingerprintManagerCompat = FingerprintManagerCompat.from(context);
-		if (fingerprintManagerCompat.isHardwareDetected())
+//		FingerprintManagerCompat fingerprintManager = FingerprintManagerCompat.from(context);
+		FingerprintManager fingerprintManager = context.getSystemService(FingerprintManager.class);
+		if (fingerprintManager.isHardwareDetected())
 		{
-			if (fingerprintManagerCompat.hasEnrolledFingerprints())
+			if (fingerprintManager.hasEnrolledFingerprints())
 			{
 				return SupportResult.SUPPORT;
 			}

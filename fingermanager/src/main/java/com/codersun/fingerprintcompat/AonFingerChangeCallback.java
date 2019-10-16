@@ -14,7 +14,7 @@ public abstract class AonFingerChangeCallback
 
 	void onChange(Context context)
 	{
-		SharePreferenceUtil.saveData(context, FingerManager.IS_FINGER_CHANGE, "1");
+		SharePreferenceUtil.saveData(context, SharePreferenceUtil.KEY_IS_FINGER_CHANGE, "1");
 		onFingerDataChange();
 	}
 

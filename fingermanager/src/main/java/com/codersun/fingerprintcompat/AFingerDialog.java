@@ -91,10 +91,28 @@ public abstract class AFingerDialog extends DialogFragment
 
 	public abstract void onSucceed();
 
+	/**
+	 * 当识别的手指没有注册时回调,但是可以继续验证
+	 *
+	 * @author codersun
+	 * @time 2019/10/16 10:36
+	 */
 	public abstract void onFailed();
 
+	/**
+	 * 指纹识别不对,会提示,手指不要大范围移动等信息,可以继续验证
+	 *
+	 * @author codersun
+	 * @time 2019/10/16 10:37
+	 */
 	public abstract void onHelp(String help);
 
+	/**
+	 * 指纹识别彻底失败,不能继续验证
+	 *
+	 * @author codersun
+	 * @time 2019/10/16 10:37
+	 */
 	public abstract void onError(String error);
 
 	public abstract void onCancelAuth();

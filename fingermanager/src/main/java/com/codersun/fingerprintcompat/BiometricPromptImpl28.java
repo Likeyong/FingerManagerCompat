@@ -57,7 +57,7 @@ public class BiometricPromptImpl28 implements IBiometricPromptImpl {
 		userCancel = false;
 		mCancellationSignal = cancel;
 
-		if (CipherHelper.getInstance().initCipher(cipher)) {
+		if (CipherHelper.getInstance().initCipher(cipher) || SharePreferenceUtil.isFingerDataChange(mActivity)) {
 			mFingerChangeCallback.onChange(mActivity);
 			return;
 		}

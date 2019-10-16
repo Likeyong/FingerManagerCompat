@@ -46,7 +46,7 @@ public class BiometricPromptImpl23 implements IBiometricPromptImpl
 	{
 		this.mCallback = mFingerManagerController.getFingerCheckCallback();
 		mSelfCanceled = false;
-		if (CipherHelper.getInstance().initCipher(mCipher))
+		if (CipherHelper.getInstance().initCipher(mCipher) || SharePreferenceUtil.isFingerDataChange(mActivity))
 		{
 			mFingerChangeCallback.onChange(mActivity);
 			return;
