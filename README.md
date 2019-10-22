@@ -17,6 +17,9 @@
 
 > https://blog.csdn.net/maxcion/article/details/102581499
 
+因为广告太多不喜欢CSDN,下面是简书链接
+> https://www.jianshu.com/p/dbb1a43cfb21
+
 　　<br>
 ## 指纹支付已有方案
 - 使用微信开源Soter库
