@@ -98,6 +98,97 @@ switch (FingerManager.checkSupport(MainActivity.this))
 					}
 ```
 <BR><BR>
+
+### 自定义android M 弹窗
+  如果你想自定义android M 的指纹识别弹窗,很简单,你只需要:
+  1. 继承AFingerDialog类
+  2. 在onCreateView中初始化你自己的布局
+  3. 实现onSucceed()、onFailed（）、onHelp（）、onError（）四个回调就好了，这四个回调建议只做UI相关操作，逻辑操作已经在外部提供了回调接口。
+
+### 弹窗回调
+1. onSucceed ：指纹识别成功，可以直接关闭弹窗
+2. onFailed ： 当识别的手指没有注册时回调,但是可以继续验证
+3. onHelp ： 指纹识别不对,会提示,手指不要大范围移动等信息,可以继续验证
+4. onError ：指纹识别彻底失败,不能继续验证
+
+一个指纹识别事件序列是这样的：
+开始识别 ---> (onHelp / onFaild) (0个或多个) ---> onSucceed / onError
+
+#### 代码
+
+```
+public class MyFingerDialog extends AFingerDialog implements View.OnClickListener
+{
+
+	private TextView titleTv;
+
+	private TextView desTv;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState)
+	{
+		super.onCreateView(inflater, container, savedInstanceState);
+		View view = inflater.inflate(R.layout.my_dialog_finger, null);
+
+		titleTv = view.findViewById(com.codersun.fingerprintcompat.R.id.finger_dialog_title_tv);
+		desTv = view.findViewById(com.codersun.fingerprintcompat.R.id.finger_dialog_des_tv);
+		TextView cancelTv = view.findViewById(com.codersun.fingerprintcompat.R.id.finger_dialog_cancel_tv);
+		cancelTv.setOnClickListener(this);
+		return view;
+	}
+
+	@Override
+	public void onSucceed()
+	{
+		dismiss();
+	}
+
+	@Override
+	public void onFailed()
+	{
+		titleTv.setText("我是失败标题,继续验证");
+		desTv.setText("连按个手指都不会,去屎吧");
+	}
+
+	@Override
+	public void onHelp(String help)
+	{
+		titleTv.setText("我是失败标题,继续验证");
+		desTv.setText("连按个手指都不会,去屎吧");
+	}
+
+	@Override
+	public void onError(String error)
+	{
+		titleTv.setText("客官,下次再来");
+		desTv.setText("这都能失败,你还能干啥,不消失,代表我是自定义弹窗");
+	}
+
+	@Override
+	public void onCancelAuth()
+	{
+
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		dismiss();
+	}
+}
+
+// 调起指纹识别得时候,将自定义的弹窗设置进去,代码如下,如果你不设置自定义弹窗会使用默认的android M 弹窗
+FingerManager.build().setApplication(getApplication())
+									.setTitle("指纹验证")
+									.setDes("请按下指纹")
+									.setNegativeText("取消")
+									.setFingerDialogApi23(new MyFingerDialog())
+									.setFingerCheckCallback()
+
+```
+
 ## 演示
 
 ### android M
