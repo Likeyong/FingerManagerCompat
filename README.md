@@ -10,7 +10,7 @@
 <br>
 本库 
 
-> api 'com.codersun:fingermanager:1.0.0'
+> api 'com.codersun:fingermanager:1.0.1'
 
 * 博文 链接
 
