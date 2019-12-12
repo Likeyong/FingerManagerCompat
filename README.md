@@ -52,53 +52,53 @@ https://mp.weixin.qq.com/s/IhNdod3rBmhkYwJ6XuTIYg
 
 ```
 switch (FingerManager.checkSupport(MainActivity.this))
-					{
-						case DEVICE_UNSUPPORTED:
-							showToast("您的设备不支持指纹");
-							break;
-						case SUPPORT_WITHOUT_DATA:
-							showToast("请在系统录入指纹后再验证");
-							break;
-						case SUPPORT:
-							FingerManager.build().setApplication(getApplication())
-									.setTitle("指纹验证")
-									.setDes("请按下指纹")
-									.setNegativeText("取消")
-									.setFingerDialogApi23(new MyFingerDialog())//如果你需要自定义android P 一下系统弹窗就设置,不设置会使用默认弹窗
-									.setFingerCheckCallback(new SimpleFingerCheckCallback()
-									{
+		{
+			case DEVICE_UNSUPPORTED:
+				showToast("您的设备不支持指纹");
+				break;
+			case SUPPORT_WITHOUT_DATA:
+				showToast("请在系统录入指纹后再验证");
+				break;
+			case SUPPORT:
+				FingerManager.build().setApplication(getApplication())
+						.setTitle("指纹验证")
+						.setDes("请按下指纹")
+						.setNegativeText("取消")
+						.setFingerDialogApi23(new MyFingerDialog())//如果你需要自定义android P 一下系统弹窗就设置,不设置会使用默认弹窗
+						.setFingerCheckCallback(new SimpleFingerCheckCallback()
+						{
 
-										@Override
-										public void onSucceed()
-										{
-											showToast("验证成功");
-										}
+							@Override
+							public void onSucceed()
+							{
+								showToast("验证成功");
+							}
 
-										@Override
-										public void onError(String error)
-										{
-											showToast("验证失败");
-										}
+							@Override
+							public void onError(String error)
+							{
+								showToast("验证失败");
+							}
 
-										@Override
-										public void onCancel()
-										{
-											showToast("您取消了识别");
-										}
-									})
-									.setFingerChangeCallback(new AonFingerChangeCallback()
-									{
+							@Override
+							public void onCancel()
+							{
+								showToast("您取消了识别");
+							}
+						})
+						.setFingerChangeCallback(new AonFingerChangeCallback()
+						{
 
-										@Override
-										protected void onFingerDataChange()
-										{
-											showToast("指纹数据发生了变化");
-										}
-									})
-									.create()
-									.startListener(MainActivity.this);
-							break;
-					}
+							@Override
+							protected void onFingerDataChange()
+							{
+								showToast("指纹数据发生了变化");
+							}
+						})
+						.create()
+						.startListener(MainActivity.this);
+				break;
+		}
 ```
 <BR><BR>
 
@@ -184,11 +184,11 @@ public class MyFingerDialog extends AFingerDialog implements View.OnClickListene
 
 // 调起指纹识别得时候,将自定义的弹窗设置进去,代码如下,如果你不设置自定义弹窗会使用默认的android M 弹窗
 FingerManager.build().setApplication(getApplication())
-									.setTitle("指纹验证")
-									.setDes("请按下指纹")
-									.setNegativeText("取消")
-									.setFingerDialogApi23(new MyFingerDialog())
-									.setFingerCheckCallback()
+				.setTitle("指纹验证")
+				.setDes("请按下指纹")
+				.setNegativeText("取消")
+				.setFingerDialogApi23(new MyFingerDialog())
+				.setFingerCheckCallback()
 
 ```
 
