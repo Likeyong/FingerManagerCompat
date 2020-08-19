@@ -136,6 +136,7 @@ public class FingerManager
 	 */
 	public static void updateFingerData(Context context)
 	{
+		SharePreferenceUtil.saveData(context, SharePreferenceUtil.KEY_IS_FINGER_CHANGE, "0");
 		CipherHelper.getInstance().createKey(context, true);
 	}
 
