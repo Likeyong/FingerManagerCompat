@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
@@ -11,9 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:layout_gravity="center"
         android:textColor="#ffffff"
         android:background="@color/colorAccent"
         android:text="验证指纹" />
+
+    <TextView
+        android:id="@+id/clear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:text="更新指纹数据(指纹数据发生变化,同步指纹数据)"
+        android:background="#f00"/>
 
 </LinearLayout>
