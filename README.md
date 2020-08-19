@@ -10,7 +10,7 @@
 <br>
 本库 
 
-> api 'com.codersun:fingermanager:1.0.1'
+> api 'com.codersun:fingermanager:1.0.2'
 
 * 博文 链接
 
@@ -235,4 +235,4 @@ FingerManager.build().setApplication(getApplication())
 
 ## 使用方式
 
-> api 'com.codersun:fingermanager:1.0.0'
+> api 'com.codersun:fingermanager:1.0.2'
