@@ -1,2 +1,3 @@
 include ':app', ':fingermanager'
+
 rootProject.name='FingerManagerCompat'
